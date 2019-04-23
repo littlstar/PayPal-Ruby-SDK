@@ -29,17 +29,29 @@ module PayPal
       if (!_has_auth_header(request) && !_is_auth_request(request))
         p '*' * 50
         p '*' * 50
+        p '_sign_request'
+        p '*' * 50
         p '*' * 50
         p '@access_token'
         p @access_token
-        p '@access_token.isExpired'
-        p @access_token.isExpired
+        if @access_token
+          p '@access_token.isExpired'
+          p @access_token.isExpired
+        end
         @access_token = nil # force new access token request
         if (!@access_token || @access_token.isExpired)
           accessTokenRequest = PayPal::AccessTokenRequest.new(@environment, @refresh_token)
+          p 'accessTokenRequest'
+          p accessTokenRequest
           tokenResponse = execute(accessTokenRequest)
+          p 'tokenResponse'
+          p tokenResponse
           @access_token = PayPal::AccessToken.new(tokenResponse.result)
+          p '@access_token'
+          p @access_token
         end
+        p '@access_token.authorizationString()'
+        p @access_token.authorizationString()
         request.headers["Authorization"] = @access_token.authorizationString()
       end
     end

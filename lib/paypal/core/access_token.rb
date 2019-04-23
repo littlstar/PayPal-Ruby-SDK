@@ -12,6 +12,8 @@ module PayPal
     def isExpired
       p '*' * 50
       p '*' * 50
+      p 'isExpired'
+      p '*' * 50
       p '*' * 50
       p 'AccessToken.isExpired'
       p 'Time.now > @date_created + @expires_in'
