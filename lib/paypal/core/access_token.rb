@@ -5,7 +5,8 @@ module PayPal
     def initialize(options)
       @access_token = options.access_token
       @token_type = options.token_type
-      @expires_in = options.expires_in * 1000
+      @expires_in = 10000
+      # @expires_in = options.expires_in * 1000
       @date_created = Time.now
     end
 
